@@ -1,46 +1,13 @@
 import csv
-from dataclasses import dataclass
 from typing import List
-
-
-@dataclass
-class MainField:
-    id : int
-    xmin : float
-    xmax : float
-    ymin : float
-    ymax :float
-
-    def __iter__(self):
-        return iter( [self.id, self.xmin, self.xmax, self.ymin, self.ymax] )
-
-@dataclass
-class SubField:
-    id : int
-    mainFieldId : int
-    xmin : float
-    xmax : float
-    ymin : float
-    ymax : float
-
-    def __iter__(self):
-        return iter( [self.id, self.xmin, self.xmax, self.ymin, self.ymax, self.mainFieldId] )
-
-@dataclass
-class CareArea:
-    id : int
-    xmin : float
-    xmax : float
-    ymin : float
-    ymax :float
-
+from model import *
 
 def parseMetaData(filepath : str) -> dict[str , int| List[int]]:
     """
     parses metadata and returns the main field size and sub field sizes
     """
-    MAIN_FIELD_SIZE :int = 0
-    SUB_FIELD_SIZES :List[int] = []
+    MAIN_FIELD_SIZE :float = 0
+    SUB_FIELD_SIZES :List[float] = []
 
     with open(filepath+r'\metadata.csv', 'r') as f:
         reader = csv.reader(f, skipinitialspace=True)

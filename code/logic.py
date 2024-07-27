@@ -1,9 +1,10 @@
-from parse_csv import *
+from model import *
+from typing import List
 
-FILE_DIRECTORY = r'C:\Users\skava\Documents\GitHub\unhack-progress\src\Dataset-0\Dataset-0\Sample\Input and Output'
+def findMainFields( ca :  CareArea, main_field_size : float) -> List[MainField] :
+    return NotImplementedError("Yet to be implemented")
 
-metadata = parseMetaData(filepath=FILE_DIRECTORY)
-care_areas = parseCareAreas(filepath=FILE_DIRECTORY)
 
-print(metadata)
-print(care_areas)
+
+def findSubFields(main_fields : List[MainField] , sub_field_sizes : List[float]) -> List[SubField] :
+    return NotImplementedError("Yet to be implemented")
