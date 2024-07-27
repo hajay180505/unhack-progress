@@ -1,6 +1,7 @@
 from model import *
 from typing import List
 from math import floor, ceil
+from shapely.geometry import Polygon
 
 # delete this
 # from time import sleep
@@ -90,6 +91,35 @@ def findSubFields(
 
 
     return subfields
+
+def notCovered(ca : CareArea , mfs :List[MainField]) -> bool:
+    if mfs:
+        total_intersection = sum( [ca.toPolygon().intersection(x.toPolygon()).area for x in mfs ])
+        for mf in mfs:
+            # print(ca.toPolygon().is_valid)
+            # print(mf.toPolygon().is_valid)
+            if (ca.toPolygon().intersection(mf.toPolygon()).area != ca.toPolygon().area) or (total_intersection == ca.toPolygon().area) :
+                return False
+        return True
+    return True
+
+    # if mfs:
+    #     print(f"bound xmin ={min([x.xmin for x in mfs])}",
+    #                   f"xmax = {max([x.xmax for x in mfs])}",
+    #                   f"ymin = {min([x.ymin for x in mfs])}",
+    #                   f"ymax = {max([x.ymax for x in mfs])}"
+    #            )
+    #     main_field_bound = MainField(
+    #         id= -1,
+    #         xmin = min([x.xmin for x in mfs]),
+    #         xmax = max([x.xmax for x in mfs]),
+    #         ymin = min([x.ymin for x in mfs]),
+    #         ymax = max([x.ymax for x in mfs]),
+    #     )
+    #     print(main_field_bound)
+    #     return not isCovered(main_field_bound, ca) 
+    # else: return True
+
 
 
 if __name__ == "__main__":
