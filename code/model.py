@@ -31,3 +31,4 @@ class CareArea:
     xmax : float
     ymin : float
     ymax :float
+    isCovered : bool = False
